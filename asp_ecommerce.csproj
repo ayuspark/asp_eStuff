@@ -26,5 +26,6 @@
     <Folder Include="Views\Account\" />
     <Folder Include="Views\RestoReview\" />
     <Folder Include="Views\Product\" />
+    <Folder Include="Views\Order\" />
   </ItemGroup>
 </Project>

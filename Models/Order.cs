@@ -13,6 +13,7 @@ namespace asp_ecommerce.Models
         [Key]
         public int OrderId { get; set; }
         public int CustomerId { get; set; }
+        public DateTime Created { get; set; }
         public ICollection<Product> Products { get; set; }
     }
 }

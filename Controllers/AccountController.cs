@@ -47,6 +47,14 @@ namespace asp_ecommerce.Controllers
                     UserName = vm.UserName,
                     Birthday = vm.Birthday,
                 };
+
+                // Put new user to Customer Table.
+                Customer new_customer = new Customer
+                {
+                    ApplicationUserEmail = vm.Email,
+                    Created = DateTime.Now,
+                };
+
                 var result = await _userManager.CreateAsync(user, vm.Password);
                 if (result.Succeeded)
                 {

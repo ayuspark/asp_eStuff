@@ -13,5 +13,6 @@ namespace asp_ecommerce.Models
         public int Qty { get; set; }
         public string Desc { get; set; }
         public string ApplicationUserEmail { get; set; }
+        public DateTime Created { get; set; }
     }
 }

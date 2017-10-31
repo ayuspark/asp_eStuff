@@ -2,11 +2,12 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewData["Title"] = "Product"; 
 }
+@model asp_ecommerce.ViewModels.ProductViewModel
 
 <div class="row">
 
     <section class="col m4 s12">
-    @Html.Partial("_ProductPartial")
+    @Html.Partial("_ProductPartial", @Model)
     </section>
     
     <section class="col m8 s12">

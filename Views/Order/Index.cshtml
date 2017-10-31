@@ -1,0 +1,20 @@
+﻿@{ Layout = "~/Views/Shared/_Layout.cshtml"; ViewData["Title"] = "Orders"; }
+<section></section>
+<section>
+    @{
+        foreach ( var order in @ViewBag.my_order)
+        {
+            <table>
+                <thead>
+                    <th>Stuff name</th>
+                    <th>How many</th>
+                    <th>Date ordered</th>
+                </thead>
+                foreach ( var stuff in order)
+                {
+                    
+                }
+            </table>
+        }
+    }
+</section>

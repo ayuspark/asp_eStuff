@@ -25,7 +25,7 @@ namespace asp_ecommerce.Controllers
         [Route("/stuff/all")]
         public IActionResult Index()
         {
-            List<Product> all_stuff = _context.Products.OrderBy(s => s.Name).ToList();
+            List<Product> all_stuff = _context.Products.OrderByDescending(s => s.Created).ToList();
             ViewBag.all_stuff = all_stuff;
             return View("Index");
         }
@@ -38,7 +38,10 @@ namespace asp_ecommerce.Controllers
             if (_context.Products.Any(p => p.Name.ToLower().Contains(vm.Name.ToLower()) && p.ApplicationUserEmail == User.Identity.Name))
             {
                 ModelState.AddModelError("", "You already have similar stuff to sell, please add something new.");
-                return PartialView("_ProductPartial", vm);
+                // TODO: get rid of this, using AJAX.
+                List<Product> all_stuff = _context.Products.OrderByDescending(s => s.Created).ToList();
+                ViewBag.all_stuff = all_stuff;
+                return View("Index", vm);
             }
             else
             {
@@ -50,13 +53,17 @@ namespace asp_ecommerce.Controllers
                         Url = vm.URL,
                         Desc = vm.Desc,
                         Qty = vm.Qty,
-                        ApplicationUserEmail = User.Identity.Name
+                        ApplicationUserEmail = User.Identity.Name,
+                        Created = DateTime.Now,
                     };
                     _context.Products.Add(new_stuff);
                     _context.SaveChanges();
                     return RedirectToAction("Index", "Home");
                 }
-                return PartialView("_ProductPartial", vm);
+                // TODO: get rid of this, using AJAX.
+                List<Product> all_stuff = _context.Products.OrderByDescending(s => s.Created).ToList();
+                ViewBag.all_stuff = all_stuff;
+                return View("Index", vm);
             }
         }
     }

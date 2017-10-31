@@ -41,10 +41,10 @@ namespace asp_ecommerce.Controllers
             {
                 var user = new ApplicationUser
                 {
-                    UserName = vm.Email,
-                    Email = vm.Email,
                     FName = vm.FName,
                     LName = vm.LName,
+                    Email = vm.Email,
+                    UserName = vm.UserName,
                     Birthday = vm.Birthday,
                 };
                 var result = await _userManager.CreateAsync(user, vm.Password);

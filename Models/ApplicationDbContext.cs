@@ -19,8 +19,9 @@ namespace asp_ecommerce.Models
         }
 
         public DbSet<ApplicationUser> UserProfile { get; set; }
-        public DbSet<Resto> Restos { get; set; }
-        public DbSet<RestoReview> RestoReviews { get; set; }
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<Product> Products { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

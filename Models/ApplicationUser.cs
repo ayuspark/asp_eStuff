@@ -6,14 +6,13 @@ namespace asp_ecommerce.Models
 {
     public class ApplicationUser : IdentityUser
     {
+        public ApplicationUser()
+        {
+            ProductsToSell = new HashSet<Product>();
+        }
         public DateTime Birthday { get; set; }
         public string FName { get; set; }
         public string LName { get; set; }
-        public List<RestoReview> Reviews { get; set; }
-
-        public ApplicationUser()
-        {
-            Reviews = new List<RestoReview>();
-        }
+        public ICollection<Product> ProductsToSell { get; set; }
     }
 }

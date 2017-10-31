@@ -1,0 +1,56 @@
+﻿@{ 
+    Layout = "~/Views/Shared/_Layout.cshtml"; 
+    ViewData["Title"] = "Register";
+}
+@using Microsoft.AspNetCore.Identity
+@using asp_ecommerce.Models
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@model asp_ecommerce.ViewModels.LoginViewModel
+
+<div class="row">
+    <form class="col s6" asp-controller="Account" asp-action="Login" method="post">
+        <h4>Use a local account to log in.</h4>
+        <hr />
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="row">
+            <div class="input-field col s6">
+                    <label class="active" asp-for="Email"></label>
+                    <input asp-for="Email" class="validate" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+        <div>
+
+        <div class="row">
+            <div class="input-field col s6">
+                <label class="active" asp-for="Password"></label>
+                <input asp-for="Password" class="validate" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input-field col s6">
+                <div class="checkbox">
+                    <label class="active" asp-for="RememberMe">
+                        <input asp-for="RememberMe" />
+                        @Html.DisplayNameFor(m => m.RememberMe)
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input-field col s6">
+                <button type="submit" class="btn waves-effect waves-light">Log in</button>
+            </div>
+        </div>
+
+            <div class="input-field col s6">
+                <p>
+                    <a asp-action="Register" asp-controller="Account">Register as a new user?</a>
+                </p>
+            </div>
+    </form>
+</div>
+

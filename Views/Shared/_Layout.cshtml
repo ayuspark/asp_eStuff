@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - asp_ecommerce</title>
+    
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="~/lib/materialize/css/materialize.min.css" media="screen,projection" />
+    
+    <link rel="stylesheet" href="~/css/site.css" />
+	@RenderSection("css", required: false)
+</head>
+<body>
+    <div class="container body-content">
+    @Html.Partial("_LoginPartial")
+    @RenderBody()
+    </div>
+        
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
+                asp-fallback-src="~/lib/jquery/dist/jquery.js"
+                asp-fallback-test="window.jQuery">
+        </script>
+        <!--Import jQuery before materialize.js-->
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+        <script type="text/javascript" src="~/lib/materialize/js/materialize.min.js"></script>
+        <!--App scripts-->
+        <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

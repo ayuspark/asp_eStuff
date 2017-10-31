@@ -1,6 +1,6 @@
 ﻿@{ 
     Layout = "~/Views/Shared/_Layout.cshtml"; 
-    ViewData["Title"] = "Register";
+    ViewData["Title"] = "Login";
 }
 @using Microsoft.AspNetCore.Identity
 @using asp_ecommerce.Models
@@ -15,10 +15,10 @@
         <div asp-validation-summary="All" class="text-danger"></div>
         <div class="row">
             <div class="input-field col s6">
-                    <label class="active" asp-for="Email"></label>
-                    <input asp-for="Email" class="validate" />
-                    <span asp-validation-for="Email" class="text-danger"></span>
-                </div>
+                <label class="active" asp-for="Email"></label>
+                <input asp-for="Email" class="validate" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
         <div>
 
         <div class="row">
@@ -46,11 +46,11 @@
             </div>
         </div>
 
-            <div class="input-field col s6">
-                <p>
-                    <a asp-action="Register" asp-controller="Account">Register as a new user?</a>
-                </p>
-            </div>
+        <div class="input-field col s6">
+            <p>
+                <a asp-action="Register" asp-controller="Account">Register as a new user?</a>
+            </p>
+        </div>
     </form>
 </div>
 

@@ -2,5 +2,33 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewData["Title"] = "Home"; 
 }
-<h1>Default Blank Page~</h1>
-<p>Get to adding stuff</p>
+@model List<asp_ecommerce.Models.Product>
+
+<section>
+    <div class="row">
+    @{
+        foreach ( var product in Model)
+        {
+            <div class="col s12 m3">
+                <div class="card">
+                    <div class="card-image">
+                        <img src="@product.Url" alt="panda">
+                        <span class="card-title">@product.Name</span>
+                        <a class="btn-floating halfway-fab waves-effect waves-light red">
+                            <i class="material-icons">add</i>
+                        </a>
+                    </div>
+                    <div class="card-content">
+                        <p>Quantity left: @product.Qty</p>
+                        <cite>"@product.Desc"</cite>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+    </div>
+    <div class="row">
+        <a asp-controller="Product" asp-action="Index">show more stuff...</a>
+    </div>
+</section>
+

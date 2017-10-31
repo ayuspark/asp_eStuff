@@ -6,20 +6,15 @@
 <h2>Registration Page</h2>
 <div class="row">
     <form class="col s6" asp-controller = "Account" asp-action = "Register" method="post">
-        <h4>Create a new account.</h4>
-        <hr />
-        
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="row">
-                <div class="col s6 input-field">
+                <div class="col m6 s6 input-field">
                     <input asp-for="FName" class="validate" />
                     <label asp-for="FName"></label>
                     <span asp-validation-for="FName" class="text-danger"></span>
                 </div>
-            </div>
-
-            <div class="row">
-                <div class="col s6 input-field">
+                
+                <div class="col m6 s6 input-field">
                     <input asp-for="LName" class="validate" />
                     <label asp-for="LName"></label>
                     <span asp-validation-for="LName" class="text-danger"></span>
@@ -27,7 +22,7 @@
             </div>
 
             <div class="row">
-                <div class="col s6 input-field">
+                <div class="col m6 s6 input-field">
                     <input asp-for="Email" class="validate" />
                     <label asp-for="Email"></label>
                     <span asp-validation-for="Email" class="text-danger"></span>
@@ -35,7 +30,7 @@
             </div>
 
             <div class="row">
-                <div class="col s6 input-field">
+                <div class="col m6 s6 input-field">
                     <input asp-for="UserName" class="validate" />
                     <label asp-for="UserName"></label>
                     <span asp-validation-for="UserName" class="text-danger"></span>
@@ -43,15 +38,13 @@
             </div>
 
             <div class="row">
-                <div class="col s6 input-field">
+                <div class="col m6 s6 input-field">
                     <input asp-for="Password" class="validate" />
                     <label asp-for="Password"></label>
                     <span asp-validation-for="Password" class="text-danger"></span>
                 </div>
-            </div>
-
-            <div class="row">
-                <div class="col s6 input-field">
+            
+                <div class="col m6 s6 input-field">
                     <input asp-for="ConfirmPassword" class="validate" />
                     <label asp-for="ConfirmPassword"></label>
                     <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
@@ -59,7 +52,7 @@
             </div>
 
             <div class="row">
-                <div class="col s6 input-field">
+                <div class="col m6 s6 input-field">
                     <input asp-for="Birthday" class="datepicker" />
                     <label class="active" asp-for="Birthday"></label>
                     <span asp-validation-for="Birthday" class="text-danger"></span>

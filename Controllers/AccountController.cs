@@ -96,7 +96,7 @@ namespace asp_ecommerce.Controllers
             return View(vm);
         }
 
-        [HttpPost]
+        [HttpGet]
         [ValidateAntiForgeryToken]
         [Route("account/logout")]
         public async Task<IActionResult> Logout()

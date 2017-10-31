@@ -1,0 +1,35 @@
+@model asp_ecommerce.ViewModels.ProductViewModel
+
+<div class="row">
+    <form class="col s12" method="post" asp-controlller="Product" asp-action="AddStuff">
+        
+        <div asp-validation-summary="All" class="text-danger"></div>
+
+        <div class="input-field col m12 s12">
+            <input asp-for="Name" class="validate" />
+            <label class="active" asp-for="Name" data-error="wrong" data-success="right"></label>
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <div class="input-field col m12 s12">
+            <input asp-for="URL" class="validate">
+            <label asp-for="URL" class="active" data-error="wrong" data-success="right"></label>
+            <span asp-validation-for="URL" class="text-danger"></span>
+        </div>
+    
+        <div class="input-field col m12 s12">
+            <input asp-for="Qty" class="validate">
+            <label asp-for="Qty" class="active"></label>
+            <span asp-validation-for="Qty" class="text-danger"></span>
+        </div>
+    
+        <div class="input-field col m12 s12">
+            <textarea class="materialize-textarea validate" asp-for="Desc"></textarea>
+            <label class="active" asp-for="Desc"></label>
+            <span asp-validation-for="Desc" class="text-danger"></span>
+        </div>
+        <div class="row">
+            <input type="submit" value="Sell this Stuff" class="col m6 s12 waves-effect waves-light btn">
+        </div>
+    </form>
+</div>

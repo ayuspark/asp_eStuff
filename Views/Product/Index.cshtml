@@ -1,0 +1,45 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Product"; 
+}
+
+<div class="row">
+
+    <section class="col m4 s12">
+    @Html.Partial("_ProductPartial")
+    </section>
+    
+    <section class="col m8 s12">
+        @{
+            int rows = @ViewBag.all_stuff.Count;
+        }
+        @{
+            for ( int i = 0; i < @rows; i+=4)
+            {
+                int rangeEnd;
+                if ( i+4 > @ViewBag.all_stuff.Count){ rangeEnd = @ViewBag.all_stuff.Count - i; }
+                else { rangeEnd = 4; }
+                <div class="row">
+                        @foreach ( var product in @ViewBag.all_stuff.GetRange(i, rangeEnd)) 
+                        {
+                            <div class="col s12 m3">
+                                <div class="card">
+                                    <div class="card-image">
+                                        <img src="@product.Url" alt="panda">
+                                        <span class="card-title">@product.Name</span>
+                                        <a class="btn-floating halfway-fab waves-effect waves-light red">
+                                            <i class="material-icons">add</i>
+                                        </a>
+                                    </div>
+                                    <div class="card-content">
+                                        <p>@product.Qty</p>
+                                        <p>@product.Desc</p>
+                                    </div>
+                                </div>
+                            </div>
+                        } 
+                </div>
+            }
+        }
+    </section>
+</div>

@@ -11,9 +11,10 @@ using System;
 namespace asp_ecommerce.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20171101200337_refactored2")]
+    partial class refactored2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -87,6 +88,8 @@ namespace asp_ecommerce.Migrations
 
                     b.Property<int>("UserId");
 
+                    //b.Property<string>("UserId");
+
                     b.HasKey("CustomerId");
 
                     b.HasIndex("UserId")
@@ -152,7 +155,7 @@ namespace asp_ecommerce.Migrations
 
                     b.Property<int>("UserId");
 
-                    //b.Property<string>("UserId");
+                    //b.Property<string>("UserId1");
 
                     b.HasKey("ProductId");
 
@@ -304,28 +307,28 @@ namespace asp_ecommerce.Migrations
                 });
 
             //modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
-            //    {
-            //        b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole")
-            //            .WithMany()
-            //            .HasForeignKey("RoleId")
-            //            .OnDelete(DeleteBehavior.Cascade);
-            //    });
+                //{
+                //    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole")
+                //        .WithMany()
+                //        .HasForeignKey("RoleId")
+                //        .OnDelete(DeleteBehavior.Cascade);
+                //});
 
             //modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
-            //    {
-            //        b.HasOne("asp_ecommerce.Models.ApplicationUser")
-            //            .WithMany()
-            //            .HasForeignKey("UserId")
-            //            .OnDelete(DeleteBehavior.Cascade);
-            //    });
+                //{
+                //    b.HasOne("asp_ecommerce.Models.ApplicationUser")
+                //        .WithMany()
+                //        .HasForeignKey("UserId")
+                //        .OnDelete(DeleteBehavior.Cascade);
+                //});
 
             //modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
-            //    {
-            //        b.HasOne("asp_ecommerce.Models.ApplicationUser")
-            //            .WithMany()
-            //            .HasForeignKey("UserId")
-            //            .OnDelete(DeleteBehavior.Cascade);
-            //    });
+                //{
+                //    b.HasOne("asp_ecommerce.Models.ApplicationUser")
+                //        .WithMany()
+                //        .HasForeignKey("UserId")
+                //        .OnDelete(DeleteBehavior.Cascade);
+                //});
 
             //modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
                 //{

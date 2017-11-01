@@ -14,5 +14,6 @@ namespace asp_ecommerce.Models
         public string FName { get; set; }
         public string LName { get; set; }
         public ICollection<Product> ProductsToSell { get; set; }
+        public virtual Customer Customer { get; set; }
     }
 }

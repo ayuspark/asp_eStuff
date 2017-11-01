@@ -45,10 +45,6 @@ namespace asp_ecommerce.Controllers
         [Route("order/stuff/add")]
         public IActionResult AddStuffToOrder(SelectOrderViewModel vm)
         {
-            Console.WriteLine("^^^^^^^^^orderid " + vm.OrderId);
-            Console.WriteLine("********OPId " + vm.OrderProductId);
-            Console.WriteLine("$$$$$$$$$ProId " + vm.ProductId);
-            Console.WriteLine("^^^^^^^^qty " + vm.ProductQty);
             int left_qty = _context.Products.SingleOrDefault(p => p.ProductId == vm.ProductId).ProductId;
             if (vm.ProductQty > left_qty)
             {

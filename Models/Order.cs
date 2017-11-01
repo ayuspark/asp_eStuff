@@ -14,6 +14,7 @@ namespace asp_ecommerce.Models
         public int OrderId { get; set; }
         public int CustomerId { get; set; }
         public DateTime Created { get; set; }
+
         public ICollection<OrderProduct> OrderProducts { get; set; }
     }
 }

@@ -28,4 +28,26 @@
     <Folder Include="Views\Product\" />
     <Folder Include="Views\Order\" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Migrations\20171031183813_initial_migration.Designer.cs" />
+    <Compile Remove="Migrations\20171031183813_initial_migration.cs" />
+    <Compile Remove="Migrations\20171031230438_added_Created_to_Product.Designer.cs" />
+    <Compile Remove="Migrations\20171031230438_added_Created_to_Product.cs" />
+    <Compile Remove="Migrations\20171031233157_added_Created_to_Order.Designer.cs" />
+    <Compile Remove="Migrations\20171031233157_added_Created_to_Order.cs" />
+    <Compile Remove="Migrations\20171101011141_added_Ordered_date_to_Product.Designer.cs" />
+    <Compile Remove="Migrations\20171101011141_added_Ordered_date_to_Product.cs" />
+    <Compile Remove="Migrations\20171101020558_added_OrderProduct_connection_table.Designer.cs" />
+    <Compile Remove="Migrations\20171101020558_added_OrderProduct_connection_table.cs" />
+    <Compile Remove="Migrations\20171101023746_added_OrderProduct_ordered_date.Designer.cs" />
+    <Compile Remove="Migrations\20171101023746_added_OrderProduct_ordered_date.cs" />
+    <Compile Remove="Migrations\20171101031254_changed_product.Designer.cs" />
+    <Compile Remove="Migrations\20171101031254_changed_product.cs" />
+    <Compile Remove="Migrations\20171101041357_added_qty_ordered.Designer.cs" />
+    <Compile Remove="Migrations\20171101041357_added_qty_ordered.cs" />
+    <Compile Remove="Migrations\20171101181822_added_FK_to_user_Prod.Designer.cs" />
+    <Compile Remove="Migrations\20171101181822_added_FK_to_user_Prod.cs" />
+    <Compile Remove="Migrations\20171101195313_refactored.Designer.cs" />
+    <Compile Remove="Migrations\20171101195313_refactored.cs" />
+  </ItemGroup>
 </Project>

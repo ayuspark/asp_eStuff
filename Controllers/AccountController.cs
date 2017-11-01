@@ -51,18 +51,18 @@ namespace asp_ecommerce.Controllers
                     Birthday = vm.Birthday,
                 };
 
-                // Put new user to Customer Table.
-                Customer new_customer = new Customer
-                {
-                    ApplicationUserEmail = vm.Email,
-                    Created = DateTime.Now,
-                };
-                _context.Customers.Add(new_customer);
-                _context.SaveChanges();
-
                 var result = await _userManager.CreateAsync(user, vm.Password);
                 if (result.Succeeded)
                 {
+                    // Put new user to Customer Table.
+                    Customer new_customer = new Customer
+                    {
+                        ApplicationUserEmail = vm.Email,
+                        Created = DateTime.Now,
+                    };
+                    _context.Customers.Add(new_customer);
+                    _context.SaveChanges();
+
                     await _signInManager.SignInAsync(user, false);
                     return RedirectToAction("Index", "Home");
                 }

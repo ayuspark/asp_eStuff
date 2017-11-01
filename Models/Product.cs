@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace asp_ecommerce.Models
 {
@@ -17,7 +18,12 @@ namespace asp_ecommerce.Models
         public string Url { get; set; }
         public int Qty { get; set; }
         public string Desc { get; set; }
+
+        [ForeignKey("ApplicationUser")]
+        public int UserId { get; set; }
         public string ApplicationUserName { get; set; }
+        public ApplicationUser User { get; set; }
+
         public DateTime Created_date_by_seller { get; set; }
         public List<OrderProduct> OrderProducts { get; set; }
     }

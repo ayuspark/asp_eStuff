@@ -11,9 +11,10 @@ using System;
 namespace asp_ecommerce.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20171101195313_refactored")]
+    partial class refactored
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -83,9 +84,11 @@ namespace asp_ecommerce.Migrations
 
                     b.Property<string>("ApplicationUserEmail");
 
+                    b.Property<int>("ApplicationUserId");
+
                     b.Property<DateTime>("Created");
 
-                    b.Property<int>("UserId");
+                    b.Property<string>("UserId");
 
                     b.HasKey("CustomerId");
 
@@ -150,9 +153,7 @@ namespace asp_ecommerce.Migrations
 
                     b.Property<string>("Url");
 
-                    b.Property<int>("UserId");
-
-                    //b.Property<string>("UserId");
+                    b.Property<string>("UserId");
 
                     b.HasKey("ProductId");
 
@@ -241,25 +242,25 @@ namespace asp_ecommerce.Migrations
                 //});
 
             //modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
-                //{
-                //    b.Property<string>("UserId");
+            //    {
+            //        b.Property<string>("UserId");
 
-                //    b.Property<string>("RoleId");
+            //        b.Property<string>("RoleId");
 
-                //    b.HasKey("UserId", "RoleId");
+            //        b.HasKey("UserId", "RoleId");
 
-                //    b.HasIndex("RoleId");
+            //        b.HasIndex("RoleId");
 
-                //    b.ToTable("AspNetUserRoles");
-                //});
+            //        b.ToTable("AspNetUserRoles");
+            //    });
 
             //modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 //{
-                //    b.Property<string>("UserId");
+                    //b.Property<string>("UserId");
 
-                //    b.Property<string>("LoginProvider");
+                    //b.Property<string>("LoginProvider");
 
-                //    b.Property<string>("Name");
+                    //b.Property<string>("Name");
 
                 //    b.Property<string>("Value");
 
@@ -320,25 +321,25 @@ namespace asp_ecommerce.Migrations
             //    });
 
             //modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
-            //    {
-            //        b.HasOne("asp_ecommerce.Models.ApplicationUser")
-            //            .WithMany()
-            //            .HasForeignKey("UserId")
-            //            .OnDelete(DeleteBehavior.Cascade);
-            //    });
-
-            //modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
                 //{
-                //    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole")
-                //        .WithMany()
-                //        .HasForeignKey("RoleId")
-                //        .OnDelete(DeleteBehavior.Cascade);
-
                 //    b.HasOne("asp_ecommerce.Models.ApplicationUser")
                 //        .WithMany()
                 //        .HasForeignKey("UserId")
                 //        .OnDelete(DeleteBehavior.Cascade);
                 //});
+
+            //modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+            //    {
+            //        b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole")
+            //            .WithMany()
+            //            .HasForeignKey("RoleId")
+            //            .OnDelete(DeleteBehavior.Cascade);
+
+            //        b.HasOne("asp_ecommerce.Models.ApplicationUser")
+            //            .WithMany()
+            //            .HasForeignKey("UserId")
+            //            .OnDelete(DeleteBehavior.Cascade);
+            //    });
 
             //modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 //{

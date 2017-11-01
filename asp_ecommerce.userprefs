@@ -1,24 +1,28 @@
 ﻿<Properties StartupConfiguration="{C01B52D2-3338-4A2C-BB9D-74E306DE891D}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="ViewModels/RegisterViewModel.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Migrations/20171101200337_refactored2.Designer.cs">
     <Files>
-      <File FileName="Models/Product.cs" Line="20" Column="42" />
-      <File FileName="Models/Order.cs" Line="17" Column="35" />
-      <File FileName="Controllers/HomeController.cs" Line="33" Column="54" />
-      <File FileName="Views/Shared/_Layout.cshtml" Line="1" Column="1" />
-      <File FileName="Views/Account/Login.cshtml" Line="50" Column="16" />
-      <File FileName="Views/Home/Index.cshtml" Line="1" Column="1" />
-      <File FileName="Controllers/RestoReviewController.cs" Line="50" Column="85" />
-      <File FileName="Views/Product/Index.cshtml" Line="1" Column="1" />
-      <File FileName="Controllers/ProductController.cs" Line="38" Column="130" />
-      <File FileName="ViewModels/ProductViewModel.cs" Line="20" Column="23" />
-      <File FileName="Controllers/OrderController.cs" Line="75" Column="52" />
-      <File FileName="Views/Order/Index.cshtml" Line="1" Column="1" />
-      <File FileName="Models/Customer.cs" Line="19" Column="2" />
-      <File FileName="ViewModels/SelectOrderViewModel.cs" Line="18" Column="40" />
-      <File FileName="Models/OrderProductClass.cs" Line="19" Column="43" />
-      <File FileName="Models/ApplicationDbContext.cs" Line="25" Column="62" />
-      <File FileName="Controllers/AccountController.cs" Line="60" Column="54" />
-      <File FileName="ViewModels/RegisterViewModel.cs" Line="21" Column="17" />
+      <File FileName="Models/Customer.cs" Line="19" Column="20" />
+      <File FileName="Models/Order.cs" Line="17" Column="9" />
+      <File FileName="Models/Product.cs" Line="23" Column="20" />
+      <File FileName="Models/ApplicationUser.cs" Line="19" Column="2" />
+      <File FileName="Controllers/HomeController.cs" Line="33" Column="54" NotebookId="1" />
+      <File FileName="Views/Shared/_Layout.cshtml" Line="1" Column="1" NotebookId="1" />
+      <File FileName="Views/Account/Login.cshtml" Line="50" Column="16" NotebookId="1" />
+      <File FileName="Views/Home/Index.cshtml" Line="1" Column="1" NotebookId="1" />
+      <File FileName="Controllers/RestoReviewController.cs" Line="50" Column="85" NotebookId="1" />
+      <File FileName="Views/Product/Index.cshtml" Line="1" Column="1" NotebookId="1" />
+      <File FileName="Controllers/ProductController.cs" Line="38" Column="130" NotebookId="1" />
+      <File FileName="ViewModels/ProductViewModel.cs" Line="20" Column="23" NotebookId="1" />
+      <File FileName="Controllers/OrderController.cs" Line="32" Column="20" NotebookId="1" />
+      <File FileName="Views/Order/Index.cshtml" Line="1" Column="1" NotebookId="1" />
+      <File FileName="ViewModels/SelectOrderViewModel.cs" Line="18" Column="40" NotebookId="1" />
+      <File FileName="Models/OrderProductClass.cs" Line="19" Column="43" NotebookId="1" />
+      <File FileName="Models/ApplicationDbContext.cs" Line="25" Column="62" NotebookId="1" />
+      <File FileName="Controllers/AccountController.cs" Line="65" Column="21" NotebookId="1" />
+      <File FileName="ViewModels/RegisterViewModel.cs" Line="15" Column="42" NotebookId="1" />
+      <File FileName="Migrations/ApplicationDbContextModelSnapshot.cs" Line="155" Column="23" NotebookId="1" />
+      <File FileName="Migrations/20171101200337_refactored2.cs" Line="40" Column="32" NotebookId="1" />
+      <File FileName="Migrations/20171101200337_refactored2.Designer.cs" Line="149" Column="17" NotebookId="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />

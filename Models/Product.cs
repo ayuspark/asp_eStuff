@@ -13,6 +13,7 @@ namespace asp_ecommerce.Models
         public int Qty { get; set; }
         public string Desc { get; set; }
         public string ApplicationUserEmail { get; set; }
-        public DateTime Created { get; set; }
+        public DateTime Created_date_by_seller { get; set; }
+        public DateTime Ordered_Date { get; set; }
     }
 }

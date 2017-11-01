@@ -25,7 +25,7 @@ namespace asp_ecommerce.Controllers
         public async Task<IActionResult> Index()
         {
             List<Product> all_stuff = await _context.Products
-                                                    .OrderByDescending(s => s.Created)
+                                                    .OrderByDescending(s => s.Created_date_by_seller)
                                                     .ToListAsync();
             all_stuff.Where(s => s.ApplicationUserEmail != User.Identity.Name).ToList();
             if (all_stuff.Count() > 4)

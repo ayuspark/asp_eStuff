@@ -25,7 +25,7 @@ namespace asp_ecommerce.Controllers
         [Route("/stuff/all")]
         public IActionResult Index()
         {
-            List<Product> all_stuff = _context.Products.OrderByDescending(s => s.Created).ToList();
+            List<Product> all_stuff = _context.Products.OrderByDescending(s => s.Created_date_by_seller).ToList();
             ViewBag.all_stuff = all_stuff;
             return View("Index");
         }
@@ -39,7 +39,7 @@ namespace asp_ecommerce.Controllers
             {
                 ModelState.AddModelError("", "You already have similar stuff to sell, please add something new.");
                 // TODO: get rid of this, using AJAX.
-                List<Product> all_stuff = _context.Products.OrderByDescending(s => s.Created).ToList();
+                List<Product> all_stuff = _context.Products.OrderByDescending(s => s.Created_date_by_seller).ToList();
                 ViewBag.all_stuff = all_stuff;
                 return View("Index", vm);
             }
@@ -54,14 +54,14 @@ namespace asp_ecommerce.Controllers
                         Desc = vm.Desc,
                         Qty = vm.Qty,
                         ApplicationUserEmail = User.Identity.Name,
-                        Created = DateTime.Now,
+                        Created_date_by_seller = DateTime.Now,
                     };
                     _context.Products.Add(new_stuff);
                     _context.SaveChanges();
                     return RedirectToAction("Index", "Home");
                 }
                 // TODO: get rid of this, using AJAX.
-                List<Product> all_stuff = _context.Products.OrderByDescending(s => s.Created).ToList();
+                List<Product> all_stuff = _context.Products.OrderByDescending(s => s.Created_date_by_seller).ToList();
                 ViewBag.all_stuff = all_stuff;
                 return View("Index", vm);
             }

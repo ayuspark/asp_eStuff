@@ -1,20 +1,54 @@
 ﻿@{ Layout = "~/Views/Shared/_Layout.cshtml"; ViewData["Title"] = "Orders"; }
-<section></section>
+@model asp_ecommerce.ViewModels.SelectOrderViewModel
+
 <section>
+    <h3>Past Orders</h3>
     @{
-        foreach ( var order in @ViewBag.my_order)
+        @if(@ViewBag.my_order.Count != 0)
         {
-            <table>
-                <thead>
-                    <th>Stuff name</th>
-                    <th>How many</th>
-                    <th>Date ordered</th>
-                </thead>
-                foreach ( var stuff in order)
-                {
-                    
-                }
-            </table>
+            @foreach ( var order in @ViewBag.my_order)
+            {
+                <table>
+                    <thead>
+                        <th>Stuff name</th>
+                        <th>How many</th>
+                        <th>Date ordered</th>
+                        <th>Action</th>
+                    </thead>
+                    @foreach ( var stuff in order.Products.GetEnumerator())
+                    {
+                        <tr>
+                            <td>stuff.Name</td>
+                            <td>stuff.Qty</td>
+                            <td>@String.Format("{0:MMM d, yyyy}", @stuff.Ordered_Date)</td>
+                            <td><a asp-controller="Order" asp-action="DelectStuffFromOrder" asp-route-id="@stuff.ProductId">Delete</a></td>
+                        </tr>
+                    }
+                    <tr>
+                        <form asp-controller="Order" asp-action="AddStuffToOrder" method="post">
+                            <td>
+                                <select asp-for="ProductId">
+                                    @foreach (var stuff in @ViewBag.stuff_to_select)
+                                    {
+                                        <option value="@stuff.ProductId">@stuff.Name</option>
+                                    }
+                                </select>
+                            </td>
+                            <td>
+                                <input asp-for="ProductQty">
+                                <input type="hidden" asp-for="OrderId" value="@order.OrderId" id="">
+                            </td>
+                            <td>
+                                <input type="submit" value="Add">
+                            </td>
+                        </form>
+                    </tr>
+                </table>
+            }
+        }
+        else
+        {
+            <h3>You have no orders! <a asp-controller="Product" asp-action="Index">Go buy stuff!</a></h3>
         }
     }
 </section>

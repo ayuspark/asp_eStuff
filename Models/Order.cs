@@ -8,12 +8,12 @@ namespace asp_ecommerce.Models
     {
         public Order()
         {
-            Products = new HashSet<Product>();
+            OrderProducts = new HashSet<OrderProduct>();
         }
         [Key]
         public int OrderId { get; set; }
         public int CustomerId { get; set; }
         public DateTime Created { get; set; }
-        public ICollection<Product> Products { get; set; }
+        public ICollection<OrderProduct> OrderProducts { get; set; }
     }
 }

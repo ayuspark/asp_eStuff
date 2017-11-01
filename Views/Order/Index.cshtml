@@ -15,35 +15,39 @@
                         <th>Date ordered</th>
                         <th>Action</th>
                     </thead>
-                    @foreach ( var stuff in order.Products.GetEnumerator())
+                    @foreach ( var op in order.OrderProducts)
                     {
                         <tr>
-                            <td>stuff.Name</td>
-                            <td>stuff.Qty</td>
-                            <td>@String.Format("{0:MMM d, yyyy}", @stuff.Ordered_Date)</td>
-                            <td><a asp-controller="Order" asp-action="DelectStuffFromOrder" asp-route-id="@stuff.ProductId">Delete</a></td>
+                            <td>@op.Product.Name</td>
+                            <td>@op.QtyOrdered</td>
+                            <td>@String.Format("{0:MMM d, yyyy}", @op.Ordered_date)</td>
+                            <td><a asp-controller="Order" asp-action="DelectStuffFromOrder" asp-route-id="@op.Product.ProductId">Delete</a></td>
                         </tr>
                     }
-                    <tr>
-                        <form asp-controller="Order" asp-action="AddStuffToOrder" method="post">
-                            <td>
-                                <select asp-for="ProductId">
-                                    @foreach (var stuff in @ViewBag.stuff_to_select)
-                                    {
-                                        <option value="@stuff.ProductId">@stuff.Name</option>
-                                    }
-                                </select>
-                            </td>
-                            <td>
-                                <input asp-for="ProductQty">
-                                <input type="hidden" asp-for="OrderId" value="@order.OrderId" id="">
-                            </td>
-                            <td>
-                                <input type="submit" value="Add">
-                            </td>
-                        </form>
-                    </tr>
                 </table>
+                
+                <div class="row">
+                    <form asp-controller="Order" asp-action="AddStuffToOrder" method="post">
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                        <div class="input-field col m6 s12">
+                            <select asp-for="ProductId">
+                                <option value="" disabled selected>Choose your option</option>
+                                @foreach (var stuff in @ViewBag.stuff_to_select)
+                                {
+                                    <option value="@stuff.ProductId">@stuff.Name</option>
+                                }
+                            </select>
+                            <label>add more stuff</label>
+                        </div>
+                        <div class="input-field col m4 s12">
+                            <input asp-for="ProductQty">
+                        </div>
+                        <input type="hidden" asp-for="OrderId" value="@order.OrderId" id="">
+                        <div class="input-field col m2 s12">
+                            <input type="submit" value="Add" class="btn waves-effect waves-light">
+                        </div>
+                    </form>
+                </div>
             }
         }
         else

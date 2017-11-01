@@ -35,7 +35,7 @@ namespace asp_ecommerce.Controllers
         [Route("/stuff/add")]
         public IActionResult AddStuff(ProductViewModel vm)
         {
-            if (_context.Products.Any(p => p.Name.ToLower().Contains(vm.Name.ToLower()) && p.ApplicationUserEmail == User.Identity.Name))
+            if (_context.Products.Any(p => p.Name.ToLower().Contains(vm.Name.ToLower()) && p.ApplicationUserName == User.Identity.Name))
             {
                 ModelState.AddModelError("", "You already have similar stuff to sell, please add something new.");
                 // TODO: get rid of this, using AJAX.
@@ -53,7 +53,7 @@ namespace asp_ecommerce.Controllers
                         Url = vm.URL,
                         Desc = vm.Desc,
                         Qty = vm.Qty,
-                        ApplicationUserEmail = User.Identity.Name,
+                        ApplicationUserName = User.Identity.Name,
                         Created_date_by_seller = DateTime.Now,
                     };
                     _context.Products.Add(new_stuff);

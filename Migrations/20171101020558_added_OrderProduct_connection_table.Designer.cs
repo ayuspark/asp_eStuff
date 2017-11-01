@@ -11,9 +11,10 @@ using System;
 namespace asp_ecommerce.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20171101020558_added_OrderProduct_connection_table")]
+    partial class added_OrderProduct_connection_table
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -113,11 +114,7 @@ namespace asp_ecommerce.Migrations
 
                     b.Property<int>("OrderId");
 
-                    b.Property<DateTime>("Ordered_date");
-
                     b.Property<int>("ProductId");
-
-                    b.Property<int>("QtyOrdered");
 
                     b.HasKey("OrderProductId");
 
@@ -133,9 +130,9 @@ namespace asp_ecommerce.Migrations
                     b.Property<int>("ProductId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("ApplicationUserId");
+                    b.Property<string>("ApplicationUserEmail");
 
-                    b.Property<string>("ApplicationUserName");
+                    b.Property<string>("ApplicationUserId");
 
                     b.Property<DateTime>("Created_date_by_seller");
 

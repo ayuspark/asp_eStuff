@@ -11,9 +11,10 @@ using System;
 namespace asp_ecommerce.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20171101031254_changed_product")]
+    partial class changed_product
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -116,8 +117,6 @@ namespace asp_ecommerce.Migrations
                     b.Property<DateTime>("Ordered_date");
 
                     b.Property<int>("ProductId");
-
-                    b.Property<int>("QtyOrdered");
 
                     b.HasKey("OrderProductId");
 

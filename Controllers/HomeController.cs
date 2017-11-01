@@ -27,7 +27,7 @@ namespace asp_ecommerce.Controllers
             List<Product> all_stuff = await _context.Products
                                                     .OrderByDescending(s => s.Created_date_by_seller)
                                                     .ToListAsync();
-            all_stuff.Where(s => s.ApplicationUserEmail != User.Identity.Name).ToList();
+            all_stuff.Where(s => s.ApplicationUserName != User.Identity.Name).ToList();
             if (all_stuff.Count() > 4)
             {
                 all_stuff = all_stuff.GetRange(0, 4);

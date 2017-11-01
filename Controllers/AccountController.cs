@@ -16,11 +16,14 @@ namespace asp_ecommerce.Controllers
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly ApplicationDbContext _context;
          
-        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
+        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager,
+                                 ApplicationDbContext context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _context = context;
         }
 
         [HttpGet]
@@ -54,6 +57,8 @@ namespace asp_ecommerce.Controllers
                     ApplicationUserEmail = vm.Email,
                     Created = DateTime.Now,
                 };
+                _context.Customers.Add(new_customer);
+                _context.SaveChanges();
 
                 var result = await _userManager.CreateAsync(user, vm.Password);
                 if (result.Succeeded)

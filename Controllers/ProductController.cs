@@ -36,9 +36,9 @@ namespace asp_ecommerce.Controllers
         [Authorize]
         [HttpPost]
         [Route("/stuff/add")]
-        public IActionResult AddStuff(ProductViewModel vm)
+        public async Task<IActionResult> AddStuff(ProductViewModel vm)
         {
-            if (_context.Products.Any(p => p.Name.ToLower().Contains(vm.Name.ToLower()) && p.ApplicationUserName == User.Identity.Name))
+            if (_context.Products.Any(p => p.Name.ToLower() == vm.Name.ToLower() && p.ApplicationUserName == User.Identity.Name))
             {
                 ModelState.AddModelError("", "You already have similar stuff to sell, please add something new.");
                 // TODO: get rid of this, using AJAX.
@@ -50,6 +50,7 @@ namespace asp_ecommerce.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    var task = await _userManager.GetUserAsync(User);
                     Product new_stuff = new Product
                     {
                         Name = vm.Name,
@@ -57,7 +58,7 @@ namespace asp_ecommerce.Controllers
                         Desc = vm.Desc,
                         Qty = vm.Qty,
                         ApplicationUserName = User.Identity.Name,
-                        ApplicationUserId = _userManager.GetUserAsync(HttpContext.User).Id,
+                        ApplicationUserId = task.Id,
                         Created_date_by_seller = DateTime.Now,
                     };
 

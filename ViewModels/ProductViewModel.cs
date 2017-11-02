@@ -17,7 +17,7 @@ namespace asp_ecommerce.ViewModels
         public string URL { get; set; }
 
         [Required]
-        [Range(1, 10)]
+        [Range(1, 100)]
         [Display(Name = "Quantity")]
         public int Qty { get; set; }
 

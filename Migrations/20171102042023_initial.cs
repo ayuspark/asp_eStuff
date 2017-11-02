@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace asp_ecommerce.Migrations
 {
-    public partial class delete_all_past : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,7 +13,8 @@ namespace asp_ecommerce.Migrations
                 name: "AspNetRoles",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "varchar(127)", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     ConcurrencyStamp = table.Column<string>(type: "longtext", nullable: true),
                     Name = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true),
                     NormalizedName = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true)
@@ -27,7 +28,8 @@ namespace asp_ecommerce.Migrations
                 name: "AspNetUsers",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "varchar(127)", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     AccessFailedCount = table.Column<int>(type: "int", nullable: false),
                     Birthday = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     ConcurrencyStamp = table.Column<string>(type: "longtext", nullable: true),
@@ -59,7 +61,7 @@ namespace asp_ecommerce.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     ClaimType = table.Column<string>(type: "longtext", nullable: true),
                     ClaimValue = table.Column<string>(type: "longtext", nullable: true),
-                    RoleId = table.Column<string>(type: "varchar(127)", nullable: false)
+                    RoleId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -80,7 +82,7 @@ namespace asp_ecommerce.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     ClaimType = table.Column<string>(type: "longtext", nullable: true),
                     ClaimValue = table.Column<string>(type: "longtext", nullable: true),
-                    UserId = table.Column<string>(type: "varchar(127)", nullable: false)
+                    UserId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -100,7 +102,7 @@ namespace asp_ecommerce.Migrations
                     LoginProvider = table.Column<string>(type: "varchar(127)", nullable: false),
                     ProviderKey = table.Column<string>(type: "varchar(127)", nullable: false),
                     ProviderDisplayName = table.Column<string>(type: "longtext", nullable: true),
-                    UserId = table.Column<string>(type: "varchar(127)", nullable: false)
+                    UserId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -117,8 +119,8 @@ namespace asp_ecommerce.Migrations
                 name: "AspNetUserRoles",
                 columns: table => new
                 {
-                    UserId = table.Column<string>(type: "varchar(127)", nullable: false),
-                    RoleId = table.Column<string>(type: "varchar(127)", nullable: false)
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    RoleId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -141,7 +143,7 @@ namespace asp_ecommerce.Migrations
                 name: "AspNetUserTokens",
                 columns: table => new
                 {
-                    UserId = table.Column<string>(type: "varchar(127)", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false),
                     LoginProvider = table.Column<string>(type: "varchar(127)", nullable: false),
                     Name = table.Column<string>(type: "varchar(127)", nullable: false),
                     Value = table.Column<string>(type: "longtext", nullable: true)
@@ -164,19 +166,18 @@ namespace asp_ecommerce.Migrations
                     CustomerId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     ApplicationUserEmail = table.Column<string>(type: "longtext", nullable: true),
-                    Created = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    UserId = table.Column<int>(type: "int", nullable: false),
-                    UserId1 = table.Column<string>(type: "varchar(127)", nullable: true)
+                    ApplicationUserId = table.Column<int>(type: "int", nullable: false),
+                    Created = table.Column<DateTime>(type: "datetime(6)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Customers", x => x.CustomerId);
                     table.ForeignKey(
-                        name: "FK_Customers_AspNetUsers_UserId1",
-                        column: x => x.UserId1,
+                        name: "FK_Customers_AspNetUsers_ApplicationUserId",
+                        column: x => x.ApplicationUserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -185,24 +186,23 @@ namespace asp_ecommerce.Migrations
                 {
                     ProductId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    ApplicationUserId = table.Column<int>(type: "int", nullable: false),
                     ApplicationUserName = table.Column<string>(type: "longtext", nullable: true),
                     Created_date_by_seller = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     Desc = table.Column<string>(type: "longtext", nullable: true),
                     Name = table.Column<string>(type: "longtext", nullable: true),
                     Qty = table.Column<int>(type: "int", nullable: false),
-                    Url = table.Column<string>(type: "longtext", nullable: true),
-                    UserId = table.Column<int>(type: "int", nullable: false),
-                    UserId1 = table.Column<string>(type: "varchar(127)", nullable: true)
+                    Url = table.Column<string>(type: "longtext", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Products", x => x.ProductId);
                     table.ForeignKey(
-                        name: "FK_Products_AspNetUsers_UserId1",
-                        column: x => x.UserId1,
+                        name: "FK_Products_AspNetUsers_ApplicationUserId",
+                        column: x => x.ApplicationUserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -291,9 +291,9 @@ namespace asp_ecommerce.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Customers_UserId1",
+                name: "IX_Customers_ApplicationUserId",
                 table: "Customers",
-                column: "UserId1",
+                column: "ApplicationUserId",
                 unique: true);
 
             migrationBuilder.CreateIndex(
@@ -312,9 +312,9 @@ namespace asp_ecommerce.Migrations
                 column: "CustomerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Products_UserId1",
+                name: "IX_Products_ApplicationUserId",
                 table: "Products",
-                column: "UserId1");
+                column: "ApplicationUserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

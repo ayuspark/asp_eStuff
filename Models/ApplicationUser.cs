@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace asp_ecommerce.Models
 {
-    public class ApplicationUser : IdentityUser<Guid>
+    public class ApplicationUser : IdentityUser<int>
     {
         public ApplicationUser()
         {
@@ -20,7 +20,7 @@ namespace asp_ecommerce.Models
         public virtual Customer Customer { get; set; }
     }
 
-    public class ApplicationRole : IdentityRole<Guid>
+    public class ApplicationRole : IdentityRole<int>
     {
         
     }

@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace asp_ecommerce.Models
 {
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, Guid>
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, int>
     {
         //public ApplicationDbContext()
         //{

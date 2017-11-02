@@ -22,7 +22,7 @@ namespace asp_ecommerce.Migrations
 
             modelBuilder.Entity("asp_ecommerce.Models.ApplicationRole", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("ConcurrencyStamp")
@@ -45,7 +45,7 @@ namespace asp_ecommerce.Migrations
 
             modelBuilder.Entity("asp_ecommerce.Models.ApplicationUser", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<int>("AccessFailedCount");
@@ -110,11 +110,9 @@ namespace asp_ecommerce.Migrations
 
                     b.Property<DateTime>("Created");
 
-                    b.Property<Guid?>("UserId");
-
                     b.HasKey("CustomerId");
 
-                    b.HasIndex("UserId")
+                    b.HasIndex("ApplicationUserId")
                         .IsUnique();
 
                     b.ToTable("Customers");
@@ -177,16 +175,14 @@ namespace asp_ecommerce.Migrations
 
                     b.Property<string>("Url");
 
-                    b.Property<Guid?>("UserId");
-
                     b.HasKey("ProductId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("ApplicationUserId");
 
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -195,7 +191,7 @@ namespace asp_ecommerce.Migrations
 
                     b.Property<string>("ClaimValue");
 
-                    b.Property<Guid>("RoleId");
+                    b.Property<int>("RoleId");
 
                     b.HasKey("Id");
 
@@ -204,7 +200,7 @@ namespace asp_ecommerce.Migrations
                     b.ToTable("AspNetRoleClaims");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<int>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -213,7 +209,7 @@ namespace asp_ecommerce.Migrations
 
                     b.Property<string>("ClaimValue");
 
-                    b.Property<Guid>("UserId");
+                    b.Property<int>("UserId");
 
                     b.HasKey("Id");
 
@@ -222,7 +218,7 @@ namespace asp_ecommerce.Migrations
                     b.ToTable("AspNetUserClaims");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<int>", b =>
                 {
                     b.Property<string>("LoginProvider");
 
@@ -230,7 +226,7 @@ namespace asp_ecommerce.Migrations
 
                     b.Property<string>("ProviderDisplayName");
 
-                    b.Property<Guid>("UserId");
+                    b.Property<int>("UserId");
 
                     b.HasKey("LoginProvider", "ProviderKey");
 
@@ -239,11 +235,11 @@ namespace asp_ecommerce.Migrations
                     b.ToTable("AspNetUserLogins");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<System.Guid>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<int>", b =>
                 {
-                    b.Property<Guid>("UserId");
+                    b.Property<int>("UserId");
 
-                    b.Property<Guid>("RoleId");
+                    b.Property<int>("RoleId");
 
                     b.HasKey("UserId", "RoleId");
 
@@ -252,9 +248,9 @@ namespace asp_ecommerce.Migrations
                     b.ToTable("AspNetUserRoles");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
                 {
-                    b.Property<Guid>("UserId");
+                    b.Property<int>("UserId");
 
                     b.Property<string>("LoginProvider");
 
@@ -271,7 +267,8 @@ namespace asp_ecommerce.Migrations
                 {
                     b.HasOne("asp_ecommerce.Models.ApplicationUser", "User")
                         .WithOne("Customer")
-                        .HasForeignKey("asp_ecommerce.Models.Customer", "UserId");
+                        .HasForeignKey("asp_ecommerce.Models.Customer", "ApplicationUserId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("asp_ecommerce.Models.Order", b =>
@@ -299,10 +296,11 @@ namespace asp_ecommerce.Migrations
                 {
                     b.HasOne("asp_ecommerce.Models.ApplicationUser", "User")
                         .WithMany("ProductsToSell")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("ApplicationUserId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
                 {
                     b.HasOne("asp_ecommerce.Models.ApplicationRole")
                         .WithMany()
@@ -310,7 +308,7 @@ namespace asp_ecommerce.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<int>", b =>
                 {
                     b.HasOne("asp_ecommerce.Models.ApplicationUser")
                         .WithMany()
@@ -318,7 +316,7 @@ namespace asp_ecommerce.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<int>", b =>
                 {
                     b.HasOne("asp_ecommerce.Models.ApplicationUser")
                         .WithMany()
@@ -326,7 +324,7 @@ namespace asp_ecommerce.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<System.Guid>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<int>", b =>
                 {
                     b.HasOne("asp_ecommerce.Models.ApplicationRole")
                         .WithMany()
@@ -339,7 +337,7 @@ namespace asp_ecommerce.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
                 {
                     b.HasOne("asp_ecommerce.Models.ApplicationUser")
                         .WithMany()

@@ -61,16 +61,20 @@ namespace asp_ecommerce.Controllers
                 var result = await _userManager.CreateAsync(user, vm.Password);
                 if (result.Succeeded)
                 {
+                    await _signInManager.SignInAsync(user, false);
+
                     // Put new user to Customer Table.
+                    var task = GetCurrentUserId();
                     Customer new_customer = new Customer
                     {
                         ApplicationUserEmail = vm.Email,
+                        ApplicationUserId = task.Id,
                         Created = DateTime.Now,
                     };
+                    Console.WriteLine("cust Applcation userId " + new_customer.ApplicationUserId);
                     _context.Customers.Add(new_customer);
                     _context.SaveChanges();
 
-                    await _signInManager.SignInAsync(user, false);
                     return RedirectToAction("Index", "Home");
                 }
                 else
@@ -127,11 +131,11 @@ namespace asp_ecommerce.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public async Task<Guid> GetCurrentUserId()
+        public async Task<int> GetCurrentUserId()
         {
             ApplicationUser user = await _userManager.GetUserAsync(HttpContext.User);
             Console.WriteLine("inside getuserid: " + user.Id);
-            return user.Id; // No need to cast here because user.Id is already a Guid, and not a string
+            return user.Id;
         }
     }
 }

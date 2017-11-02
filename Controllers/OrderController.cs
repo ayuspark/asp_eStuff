@@ -30,13 +30,22 @@ namespace asp_ecommerce.Controllers
                                            .Include(o => o.OrderProducts)
                                            .ThenInclude(op => op.Product)
                                            .ToList();
-
-            List<Product> stuff_to_select = _context.Products.Where(s => s.ApplicationUserName != User.Identity.Name)
+            
+            List<List<Product>> select_options = new List<List<Product>>();
+            foreach (var order in my_order)
+            {
+                List<Product> stuff_to_select = _context.Products.Where(s => s.ApplicationUserName != User.Identity.Name)
                                                     .OrderBy(s => s.Name)
                                                     .ToList();
+                foreach (var op in order.OrderProducts)
+                {
+                    stuff_to_select.Remove(stuff_to_select.SingleOrDefault(s => s.ProductId == op.ProductId));
+                }
+                select_options.Add(stuff_to_select);
+            }
 
             ViewBag.my_order = my_order;
-            ViewBag.stuff_to_select = stuff_to_select;
+            ViewBag.select_options = select_options;
             return View("Index");
         }
 

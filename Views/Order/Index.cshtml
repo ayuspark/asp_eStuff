@@ -6,7 +6,7 @@
     @{
         @if(@ViewBag.my_order.Count != 0)
         {
-            @foreach ( var order in @ViewBag.my_order)
+            @for ( var i = 0; i < @ViewBag.my_order.Count; i++)
             {
                 <table>
                     <thead>
@@ -15,7 +15,7 @@
                         <th>Date ordered</th>
                         <th>Action</th>
                     </thead>
-                    @foreach ( var op in order.OrderProducts)
+                    @foreach ( var op in @ViewBag.my_order[i].OrderProducts)
                     {
                         <tr>
                             <td>@op.Product.Name</td>
@@ -32,9 +32,9 @@
                         <div class="input-field col m6 s12">
                             <select asp-for="ProductId">
                                 <option value="" disabled selected>Choose your option</option>
-                                @foreach (var stuff in @ViewBag.stuff_to_select)
+                                @foreach (var option in @ViewBag.select_options[i])
                                 {
-                                    <option value="@stuff.ProductId">@stuff.Name</option>
+                                    <option value="@option.ProductId">@option.Name</option>
                                 }
                             </select>
                             <label>add more stuff</label>
@@ -42,7 +42,7 @@
                         <div class="input-field col m4 s12">
                             <input asp-for="ProductQty">
                         </div>
-                        <input type="hidden" asp-for="OrderId" value="@order.OrderId" id="">
+                        <input type="hidden" asp-for="OrderId" value="@ViewBag.my_order[i].OrderId" id="">
                         <div class="input-field col m2 s12">
                             <input type="submit" value="Add" class="btn waves-effect waves-light">
                         </div>

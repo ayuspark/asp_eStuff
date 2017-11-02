@@ -63,15 +63,17 @@ namespace asp_ecommerce.Controllers
                 {
                     await _signInManager.SignInAsync(user, false);
 
+
                     // Put new user to Customer Table.
-                    var task = GetCurrentUserId();
+                    int new_user_id = _context.Users.SingleOrDefault(u => u.Email == vm.Email).Id;
+
                     Customer new_customer = new Customer
                     {
                         ApplicationUserEmail = vm.Email,
-                        ApplicationUserId = task.Id,
+                        ApplicationUserId = new_user_id,
                         Created = DateTime.Now,
                     };
-                    Console.WriteLine("cust Applcation userId " + new_customer.ApplicationUserId);
+                  
                     _context.Customers.Add(new_customer);
                     _context.SaveChanges();
 
@@ -108,8 +110,6 @@ namespace asp_ecommerce.Controllers
                 var result = await _signInManager.PasswordSignInAsync(vm.UsernameLogin, vm.PasswordLogin, vm.RememberMe, false);
                 if (result.Succeeded)
                 {
-                    Console.WriteLine("************* user logged in");
-                    Console.WriteLine("*************" + User.Identity.IsAuthenticated);
                     return RedirectToAction("Index", "Home");
                 }
                 else
@@ -126,16 +126,6 @@ namespace asp_ecommerce.Controllers
         {
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
-        }
-
-
-        [HttpGet]
-        [AllowAnonymous]
-        public async Task<int> GetCurrentUserId()
-        {
-            ApplicationUser user = await _userManager.GetUserAsync(HttpContext.User);
-            Console.WriteLine("inside getuserid: " + user.Id);
-            return user.Id;
         }
     }
 }

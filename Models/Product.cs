@@ -20,9 +20,9 @@ namespace asp_ecommerce.Models
         public string Desc { get; set; }
 
         [ForeignKey("ApplicationUser")]
-        public int UserId { get; set; }
+        public int ApplicationUserId { get; set; }
         public string ApplicationUserName { get; set; }
-        public ApplicationUser User { get; set; }
+        public virtual ApplicationUser User { get; set; }
 
         public DateTime Created_date_by_seller { get; set; }
         public List<OrderProduct> OrderProducts { get; set; }

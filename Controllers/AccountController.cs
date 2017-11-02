@@ -26,12 +26,19 @@ namespace asp_ecommerce.Controllers
             _context = context;
         }
 
+        //[HttpGet]
+        //[AllowAnonymous]
+        //[Route("account/register")]
+        //public IActionResult Register()
+        //{
+        //    return View("Index");
+        //}
+
         [HttpGet]
         [AllowAnonymous]
-        [Route("account/register")]
-        public IActionResult Register()
+        public IActionResult Index()
         {
-            return View();
+            return View("Index");
         }
 
         [HttpPost]
@@ -75,16 +82,16 @@ namespace asp_ecommerce.Controllers
                 }
                 
             }
-            return View(vm); 
+            return View("Index"); 
         }
 
-        [HttpGet]
-        [Route("account/login")]
-        [AllowAnonymous]
-        public IActionResult Login()
-        {
-            return View();
-        }
+        //[HttpGet]
+        //[Route("account/login")]
+        //[AllowAnonymous]
+        //public IActionResult Login()
+        //{
+        //    return View("Index");
+        //}
 
         [HttpPost]
         [Route("account/Login")]
@@ -94,7 +101,7 @@ namespace asp_ecommerce.Controllers
         {
             if (ModelState.IsValid)
             {
-                var result = await _signInManager.PasswordSignInAsync(vm.Email, vm.Password, vm.RememberMe, false);
+                var result = await _signInManager.PasswordSignInAsync(vm.UsernameLogin, vm.PasswordLogin, vm.RememberMe, false);
                 if (result.Succeeded)
                 {
                     Console.WriteLine("************* user logged in");
@@ -106,16 +113,25 @@ namespace asp_ecommerce.Controllers
                     ModelState.AddModelError("", "Login attempt failed.");
                 }
             }
-            return View(vm);
+            return View("Index");
         }
 
         [HttpGet]
-        [ValidateAntiForgeryToken]
         [Route("account/logout")]
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
+        }
+
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<Guid> GetCurrentUserId()
+        {
+            ApplicationUser user = await _userManager.GetUserAsync(HttpContext.User);
+            Console.WriteLine("inside getuserid: " + user.Id);
+            return user.Id; // No need to cast here because user.Id is already a Guid, and not a string
         }
     }
 }

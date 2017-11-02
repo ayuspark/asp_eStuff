@@ -6,10 +6,12 @@ namespace asp_ecommerce.ViewModels
     public class LoginViewModel
     {
         [Required, DataType(DataType.Password), MinLength(4), MaxLength(50)]
-        public string Password { set; get; }
+        [Display(Name = "Password")]
+        public string PasswordLogin { set; get; }
 
-        [Required, EmailAddress]
-        public string Email { get; set; }
+        [Required]
+        [Display(Name = "Username")]
+        public string UsernameLogin { get; set; }
 
         [Display(Name = "Remember me?")]
         public bool RememberMe { get; set; }

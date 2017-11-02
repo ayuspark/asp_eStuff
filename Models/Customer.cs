@@ -16,7 +16,7 @@ namespace asp_ecommerce.Models
         public DateTime Created { get; set; }
 
         [ForeignKey("ApplicationUser")]
-        public int UserId { get; set; }
+        public int ApplicationUserId { get; set; }
         public string ApplicationUserEmail { get; set; }
         public virtual ApplicationUser User { get; set; }
 

@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace asp_ecommerce.Models
 {
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, Guid>
     {
-        public ApplicationDbContext()
-        {
-        }
+        //public ApplicationDbContext()
+        //{
+        //}
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -23,7 +23,7 @@ namespace asp_ecommerce.Models
         public DbSet<Order> Orders { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<OrderProduct> OrderProducts { get; set; }
-
+       
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -33,3 +33,4 @@ namespace asp_ecommerce.Models
         }
     }
 }
+

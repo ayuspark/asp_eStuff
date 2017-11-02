@@ -27,6 +27,7 @@
     <Folder Include="Views\RestoReview\" />
     <Folder Include="Views\Product\" />
     <Folder Include="Views\Order\" />
+    <Folder Include="Migrations\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Migrations\20171031183813_initial_migration.Designer.cs" />
@@ -49,5 +50,16 @@
     <Compile Remove="Migrations\20171101181822_added_FK_to_user_Prod.cs" />
     <Compile Remove="Migrations\20171101195313_refactored.Designer.cs" />
     <Compile Remove="Migrations\20171101195313_refactored.cs" />
+    <Compile Remove="Migrations\20171101200337_refactored2.Designer.cs" />
+    <Compile Remove="Migrations\20171101200337_refactored2.cs" />
+    <Compile Remove="Migrations\20171101212331_migrate_after_fix.Designer.cs" />
+    <Compile Remove="Migrations\20171101212331_migrate_after_fix.cs" />
+    <Compile Remove="Migrations\ApplicationDbContextModelSnapshot.cs" />
+    <Compile Remove="Migrations\20171101212935_delete_all_past.Designer.cs" />
+    <Compile Remove="Migrations\20171101212935_delete_all_past.cs" />
+    <Compile Remove="Migrations\20171101213758_delete_all_past.Designer.cs" />
+    <Compile Remove="Migrations\20171101213758_delete_all_past.cs" />
+    <Compile Remove="Migrations\20171101214555_delete_all_past.Designer.cs" />
+    <Compile Remove="Migrations\20171101214555_delete_all_past.cs" />
   </ItemGroup>
 </Project>

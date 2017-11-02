@@ -9,13 +9,12 @@
         <a asp-controller="Home" asp-action="Index">Hello, @UserManager.GetUserName(User)!</a>
     </li>
     <li>
-        <a asp-controller="Account" asp-action="Logout">Logout</a>
+        <a href="@Url.Action("Logout", "Account")">
+            Log Out
+        </a>
     </li>
 } else {
     <li>
-        <a asp-area="" asp-controller="Account" asp-action="Register">Register</a>
-    </li>
-    <li>
-        <a asp-area="" asp-controller="Account" asp-action="Login">Log in</a>
+        <a asp-area="" asp-controller="Account" asp-action="Index">User Hub</a>
     </li>
 }

@@ -34,5 +34,7 @@ namespace asp_ecommerce.Controllers
             }
             return View("Index", all_stuff);
         }
+
+       
     }
 }

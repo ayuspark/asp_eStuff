@@ -1,0 +1,40 @@
+﻿@model asp_ecommerce.ViewModels.LoginViewModel
+
+<section class="row">
+    <h5>Login here</h5>
+    <form class="col m10 s12" asp-controller="Account" asp-action="Login" method="post">
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="row">
+            <div class="input-field col m10 s12">
+                <input asp-for="UsernameLogin" class="validate" />
+                <label class="active" asp-for="UsernameLogin"></label>
+                <span asp-validation-for="UsernameLogin" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input-field col m10 s12">
+                <input asp-for="PasswordLogin" class="validate" />
+                <label class="active" asp-for="PasswordLogin"></label>
+                <span asp-validation-for="PasswordLogin" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="row">
+            <p class="col m10 s12">
+                <input class="filled-in" asp-for="RememberMe" />
+                <label asp-for="RememberMe"></label>
+            </p>
+        </div>
+           
+        <button type="submit" class="btn waves-effect waves-light">Log in</button>
+    </form>
+</section>
+                    
+            
+                
+                       
+            
+           
+
+

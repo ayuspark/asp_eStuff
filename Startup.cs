@@ -32,7 +32,7 @@ namespace asp_ecommerce
                                                         options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
 
             //Add Identity
-            services.AddIdentity<ApplicationUser, IdentityRole>()
+            services.AddIdentity<ApplicationUser, ApplicationRole>()
             .AddEntityFrameworkStores<ApplicationDbContext>()
             .AddDefaultTokenProviders();
 

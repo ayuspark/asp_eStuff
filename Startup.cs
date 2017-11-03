@@ -1,4 +1,5 @@
 using System;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -56,9 +57,9 @@ namespace asp_ecommerce
             {
                 options.Cookie.HttpOnly = true;
                 options.Cookie.Expiration = TimeSpan.FromDays(10);
-                // options.LoginPath = "/user/login";
-                // options.LogoutPath = "/user/logout";
-                options.AccessDeniedPath = "/";
+                 options.LoginPath = "/account";
+                 options.LogoutPath = "/account/logout";
+                options.AccessDeniedPath = new PathString("/account");
                 options.SlidingExpiration = true;
             });
         }

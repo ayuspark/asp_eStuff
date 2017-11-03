@@ -5,7 +5,8 @@
 @model asp_ecommerce.ViewModels.ProductViewModel
 
 <div class="row">
-
+    <p class="text-danger">@ViewBag.stuff_info</p>
+    <p class="text-danger">@ViewBag.confirm_order</p>
     <section class="col m3 s12">
     @Html.Partial("_ProductPartial", @Model)
     </section>
@@ -28,7 +29,7 @@
                                     <div class="card-image">
                                         <img src="@product.Url" alt="panda">
                                         <span class="card-title">@product.Name</span>
-                                        <a class="btn-floating halfway-fab waves-effect waves-light red">
+                                        <a class="btn-floating halfway-fab waves-effect waves-light red" asp-controller="Product" asp-action="AddToShoppingCart" asp-route-productId="@product.ProductId">
                                             <i class="material-icons">add</i>
                                         </a>
                                     </div>
@@ -42,6 +43,6 @@
                 </div>
             }
         }
-    <button class="btn waves-effect waves-light"><a asp-controller="Product" asp-action="CreateOrder">Confirm Order</a></button>
+    <a id="confirm_order" class="btn waves-effect waves-light" asp-controller="Product" asp-action="ConfirmOrder">Confirm Order</a>
     </section>
 </div>

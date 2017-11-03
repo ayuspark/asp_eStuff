@@ -4,3 +4,13 @@
     font-family: Roboto, sans-serif;
     font-size: 0.7em;
 }
+
+#confirm_order {
+    position: fixed;
+    right: 3px;
+    bottom: 3px;
+}
+
+#confirm_order a {
+    text-decoration: none;
+}

@@ -103,6 +103,7 @@ namespace asp_ecommerce.Controllers
         [Route("order/stuff/delete/{orderProductId}/{productId}")]
         public IActionResult DelectStuffFromOrder(int orderProductId, int productId)
         {
+            //TODO: Delete order when no stuff on the order!
             OrderProduct curr = _context.OrderProducts.Include(op => op.Product)
                                         .SingleOrDefault(op => op.OrderProductId == orderProductId && op.ProductId == productId);
             int qty_to_add_back_to_inventory = curr.QtyOrdered;

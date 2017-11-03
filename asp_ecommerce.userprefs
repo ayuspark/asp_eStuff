@@ -1,11 +1,14 @@
 ﻿<Properties StartupConfiguration="{C01B52D2-3338-4A2C-BB9D-74E306DE891D}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Controllers/OrderController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Models/Order.cs">
     <Files>
       <File FileName="Controllers/HomeController.cs" Line="26" Column="10" />
       <File FileName="Models/ApplicationUser.cs" Line="1" Column="1" />
-      <File FileName="Controllers/ProductController.cs" Line="53" Column="70" />
-      <File FileName="Controllers/AccountController.cs" Line="112" Column="18" />
-      <File FileName="Controllers/OrderController.cs" Line="61" Column="21" />
+      <File FileName="Controllers/ProductController.cs" Line="87" Column="39" />
+      <File FileName="Controllers/AccountController.cs" Line="120" Column="50" />
+      <File FileName="Controllers/OrderController.cs" Line="1" Column="1" />
+      <File FileName="Startup.cs" Line="64" Column="10" />
+      <File FileName="Models/OrderProduct.cs" Line="20" Column="6" />
+      <File FileName="Models/Order.cs" Line="17" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />

@@ -36,7 +36,7 @@ namespace asp_ecommerce.Controllers
         [Authorize]
         [HttpPost]
         [Route("/stuff/add")]
-        public async Task<IActionResult> AddStuff(ProductViewModel vm)
+        public IActionResult AddStuff(ProductViewModel vm)
         {
             if (_context.Products.Any(p => p.Name.ToLower() == vm.Name.ToLower() && p.ApplicationUserName == User.Identity.Name))
             {
@@ -50,7 +50,8 @@ namespace asp_ecommerce.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    var task = await _userManager.GetUserAsync(User);
+                    var task = _userManager.GetUserAsync(User).Result;
+                   
                     Product new_stuff = new Product
                     {
                         Name = vm.Name,
@@ -72,6 +73,23 @@ namespace asp_ecommerce.Controllers
                 ViewBag.all_stuff = all_stuff;
                 return View("Index", vm);
             }
+        }
+
+
+        [HttpGet]
+        [Route("/stuff/confirm_order")]
+        public IActionResult CreateOrder()
+        {
+            var task = _userManager.GetUserAsync(User).Result;
+            Order new_order = new Order
+            {
+                CustomerId = task.Id,
+                Created = DateTime.Now,
+            };
+            new_order.OrderProducts.Add();
+            _context.Orders.Add(new_order);
+            _context.SaveChanges();
+            return RedirectToAction("Index", "Order");
         }
 
        

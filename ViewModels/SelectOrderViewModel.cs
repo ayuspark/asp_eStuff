@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc;
 
 namespace asp_ecommerce.ViewModels
 {
@@ -15,6 +16,7 @@ namespace asp_ecommerce.ViewModels
         public int OrderProductId { get; set; }
 
         [Required]
+        [HiddenInput]
         public int OrderId { get; set; }
     }
 }

@@ -3,6 +3,8 @@
 
 <section>
     <h3>Past Orders</h3>
+    <p class="text-danger">@ViewBag.removed</p>
+    <p class="text-danger">@ViewBag.error</p>
     @{
         @if(@ViewBag.my_order.Count != 0)
         {
@@ -21,7 +23,7 @@
                             <td>@op.Product.Name</td>
                             <td>@op.QtyOrdered</td>
                             <td>@String.Format("{0:MMM d, yyyy}", @op.Ordered_date)</td>
-                            <td><a asp-controller="Order" asp-action="DelectStuffFromOrder" asp-route-id="@op.Product.ProductId">Delete</a></td>
+                            <td><a asp-controller="Order" asp-action="DelectStuffFromOrder" asp-route-orderProductId="@op.OrderProductId" asp-route-productId="@op.Product.ProductId">Delete</a></td>
                         </tr>
                     }
                 </table>

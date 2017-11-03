@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
@@ -17,13 +18,15 @@ namespace asp_ecommerce.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly ApplicationDbContext _context;
+        private readonly ILogger _logger;
          
         public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager,
-                                 ApplicationDbContext context)
+                                 ApplicationDbContext context, ILogger<AccountController> logger)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _context = context;
+            _logger = logger;
         }
 
         //[HttpGet]
@@ -66,27 +69,18 @@ namespace asp_ecommerce.Controllers
 
                     // Put new user to Customer Table.
                     int new_user_id = _context.Users.SingleOrDefault(u => u.Email == vm.Email).Id;
-
                     Customer new_customer = new Customer
                     {
                         ApplicationUserEmail = vm.Email,
                         ApplicationUserId = new_user_id,
                         Created = DateTime.Now,
                     };
-                  
+
                     _context.Customers.Add(new_customer);
                     _context.SaveChanges();
 
                     return RedirectToAction("Index", "Home");
                 }
-                else
-                {
-                    foreach (var error in result.Errors)
-                    {
-                        ModelState.AddModelError("", error.Description);
-                    }
-                }
-                
             }
             return View("Index"); 
         }
@@ -114,7 +108,8 @@ namespace asp_ecommerce.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Login attempt failed.");
+                    //ModelState.AddModelError("", "Login attempt failed.");
+                    ViewBag.error = "Uh oh, login attempt failed.";
                 }
             }
             return View("Index");

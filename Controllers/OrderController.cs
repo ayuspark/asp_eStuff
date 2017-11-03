@@ -19,6 +19,7 @@ namespace asp_ecommerce.Controllers
             _context = context;
         }
 
+
         [HttpGet]
         [Route("orders/all")]
         public IActionResult Index()
@@ -46,29 +47,31 @@ namespace asp_ecommerce.Controllers
 
             ViewBag.my_order = my_order;
             ViewBag.select_options = select_options;
+            ViewBag.removed = TempData["removed"];
+            ViewBag.error = TempData["error"];
             return View("Index");
         }
+
 
         [AllowAnonymous]
         [HttpPost]
         [Route("order/stuff/add")]
         public IActionResult AddStuffToOrder(SelectOrderViewModel vm)
         {
-            int left_qty = _context.Products.SingleOrDefault(p => p.ProductId == vm.ProductId).ProductId;
-            if (vm.ProductQty > left_qty)
+            if (ModelState.IsValid)
             {
-                ModelState.AddModelError("", "There is not enough stuff for the quantity you made.");
-                return RedirectToAction("Index", "Order");
-            }
-            else
-            {
-                if (ModelState.IsValid)
+                int left_qty = _context.Products.SingleOrDefault(p => p.ProductId == vm.ProductId).ProductId;
+                if (vm.ProductQty > left_qty)
+                {
+                    TempData["error"] = "There is not enough stuff for the quantity you made.";
+                    return RedirectToAction("Index", "Order");
+                }
+                else
                 {
                     Product stuff_to_add = _context.Products.SingleOrDefault(p => p.ProductId == vm.ProductId);
                     stuff_to_add.Qty -= (int)vm.ProductQty;
                     _context.SaveChanges();
 
-                    //TODO: wrong model
                     Order curr_order = _context.Orders.SingleOrDefault(p => p.OrderId == vm.OrderId);
                     OrderProduct new_op = new OrderProduct
                     {
@@ -82,16 +85,38 @@ namespace asp_ecommerce.Controllers
                     curr_order.OrderProducts.Add(new_op);
                     _context.SaveChanges();
                 }
-                return RedirectToAction("Index", "Order");
             }
+            TempData["error"] = "Please select stuff and its quantity.";
+            foreach(var er in ModelState.Values)
+            {
+                foreach (var e in er.Errors)
+                {
+                    Console.WriteLine("&&&&&& error" +  e.ErrorMessage);
+
+                }
+            }
+            return RedirectToAction("Index", "Order");
         }
 
-        //[HttpGet]
-        //[Route("order/stuff/delete/{id}")]
-        //public IActionResult DelectStuffFromOrder(int id)
-        //{
-            
-        //}
+
+        [HttpGet]
+        [Route("order/stuff/delete/{orderProductId}/{productId}")]
+        public IActionResult DelectStuffFromOrder(int orderProductId, int productId)
+        {
+            OrderProduct curr = _context.OrderProducts.Include(op => op.Product)
+                                        .SingleOrDefault(op => op.OrderProductId == orderProductId && op.ProductId == productId);
+            int qty_to_add_back_to_inventory = curr.QtyOrdered;
+
+            TempData["removed"] = $"You removed stuff: {qty_to_add_back_to_inventory} {curr.Product.Name}.";
+            _context.Remove(curr);
+            _context.SaveChanges();
+
+            Product back_to_inventory = _context.Products.SingleOrDefault(p => p.ProductId == productId);
+            back_to_inventory.Qty += qty_to_add_back_to_inventory;
+            _context.SaveChanges();
+           
+            return RedirectToAction("Index", "Order");
+        }
 
     }
 }

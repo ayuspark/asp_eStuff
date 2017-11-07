@@ -1,0 +1,20 @@
+@using System.Collections.Generic
+@using System.Linq
+@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Http.Authentication
+@using asp_ecommerce.Models
+@inject SignInManager<ApplicationUser> SignInManager
+
+@{ 
+    var loginProviders = (await SignInManager.GetExternalAuthenticationSchemesAsync()).ToList(); 
+    <form asp-action="ExternalLogin" asp-route-returnurl="@ViewData[" ReturnUrl "]" method="post">
+        <div>
+            <p>
+                @foreach (var provider in loginProviders) {
+                <button type="submit" class="btn" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">Log in with @provider.Name</button>
+                }
+            </p>
+        </div>
+    </form>
+}

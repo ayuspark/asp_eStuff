@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Rewrite;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -53,6 +55,17 @@ namespace asp_ecommerce
                 options.User.RequireUniqueEmail = true;
             });
 
+            services.Configure<MvcOptions>(options =>
+            {
+                options.Filters.Add(new RequireHttpsAttribute());
+            });
+            
+            services.AddAuthentication().AddGoogle(googleOptions =>
+            {
+               googleOptions.ClientId = Configuration["Authentication:Google:ClientId"];
+               googleOptions.ClientSecret = Configuration["Authentication:Google:ClientSecret"];
+            });
+
             services.ConfigureApplicationCookie(options =>
             {
                 options.Cookie.HttpOnly = true;
@@ -62,11 +75,16 @@ namespace asp_ecommerce
                 options.AccessDeniedPath = new PathString("/account");
                 options.SlidingExpiration = true;
             });
+
+            services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory, IHostingEnvironment env)
         {
+            var options = new RewriteOptions().AddRedirectToHttps();
+            app.UseRewriter(options);
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

@@ -1,22 +1,10 @@
 using System.IO;
+using System.Net;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 
 namespace asp_ecommerce
 {
-    //public class Program
-    //{
-    //    public static void Main(string[] args)
-    //    {
-    //        var host = new WebHostBuilder()
-    //            .UseKestrel()
-    //            .UseContentRoot(Directory.GetCurrentDirectory())
-    //            .UseStartup<Startup>()
-    //            .Build();
-
-    //        host.Run();
-    //    }
-    //}
     public class Program
     {
         public static void Main(string[] args)
@@ -27,6 +15,15 @@ namespace asp_ecommerce
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
+                .UseKestrel(options =>
+                {
+                    options.AddServerHeader = false;
+                    options.Listen(IPAddress.Loopback, 5000, listenOptions =>
+                    {
+                        listenOptions.UseHttps("localhost.pfx", "password");
+                    });
+                })
+                .UseUrls(urls: "https://localhost:5000")
                 .UseIISIntegration()
                 .Build();
     }

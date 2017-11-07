@@ -4,8 +4,12 @@
     <h4 class="center">Welcome to eStuff User Hub!</h4>
     <div class="col m6">
         @Html.Partial("_AccLoginPartial")
+        <div class="external-login">
+            <span>or</span>
+             @Html.Partial("_ExternalLoginPartial")
+        </div>
     </div>
     <div class="col m6">
-        @Html.Partial("_AccRegisterPartial")
+            @Html.Partial("_AccRegisterPartial")
     </div>
 </div>

@@ -14,3 +14,7 @@
 #confirm_order a {
     text-decoration: none;
 }
+
+.external-login-btn {
+    margin: 0.7rem auto;
+}

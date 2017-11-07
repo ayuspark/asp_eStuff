@@ -9,12 +9,10 @@
 @{ 
     var loginProviders = (await SignInManager.GetExternalAuthenticationSchemesAsync()).ToList(); 
     <form asp-action="ExternalLogin" asp-route-returnurl="@ViewData[" ReturnUrl "]" method="post">
-        <div>
-            <p>
-                @foreach (var provider in loginProviders) {
-                <button type="submit" class="btn" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">Log in with @provider.Name</button>
-                }
-            </p>
-        </div>
+        @foreach (var provider in loginProviders) {
+            <div class="col m5 s12">
+                <button type="submit" class="btn external-login-btn col m12 s12" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.Name</button>
+            </div>
+        }
     </form>
 }

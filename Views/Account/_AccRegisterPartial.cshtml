@@ -2,7 +2,7 @@
 
 <section class="row">
     <h5>Register here</h5>
-    <form class="col m10 s12" asp-controller = "Account" asp-action = "Register" method="post">
+    <form class="col m10 s12" asp-controller = "Account" asp-action = "Register" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post">
             <!-- <div asp-validation-summary="All" class="text-danger"></div> -->
             <div class="row">
                 <div class="col m6 s12 input-field">

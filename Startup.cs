@@ -55,15 +55,24 @@ namespace asp_ecommerce
                 options.User.RequireUniqueEmail = true;
             });
 
+            // forcing SSL for external logins
             services.Configure<MvcOptions>(options =>
             {
                 options.Filters.Add(new RequireHttpsAttribute());
             });
             
+            // GOOGLE
             services.AddAuthentication().AddGoogle(googleOptions =>
             {
                googleOptions.ClientId = Configuration["Authentication:Google:ClientId"];
                googleOptions.ClientSecret = Configuration["Authentication:Google:ClientSecret"];
+            });
+
+            // FACEBOOK
+            services.AddAuthentication().AddFacebook( fbOptions => 
+            {
+                fbOptions.ClientId = Configuration["Authentication:Facebook:AppId"];
+                fbOptions.ClientSecret = Configuration["Authentication:Facebook:AppSecret"];
             });
 
             services.ConfigureApplicationCookie(options =>
@@ -82,6 +91,7 @@ namespace asp_ecommerce
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory, IHostingEnvironment env)
         {
+            // forcing SSL for external logins
             var options = new RewriteOptions().AddRedirectToHttps();
             app.UseRewriter(options);
 

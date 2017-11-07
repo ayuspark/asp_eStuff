@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using asp_ecommerce.Models;
 using asp_ecommerce.ViewModels;
 
@@ -51,8 +52,9 @@ namespace asp_ecommerce.Controllers
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         [Route("account/register")]
-        public async Task<IActionResult> Register(RegisterViewModel vm)
+        public async Task<IActionResult> Register(RegisterViewModel vm, string returnUrl = null)
         {
+            ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser
@@ -82,7 +84,9 @@ namespace asp_ecommerce.Controllers
                     _context.Customers.Add(new_customer);
                     _context.SaveChanges();
 
-                    return RedirectToAction("Index", "Home");
+                    // return RedirectToAction("Index", "Home");
+                    _logger.LogInformation("User created a new account with password.");
+                    return RedirectToLocal(returnUrl);
                 }
             }
             return View("Index"); 
@@ -100,14 +104,17 @@ namespace asp_ecommerce.Controllers
         [Route("account/Login")]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(LoginViewModel vm)
+        public async Task<IActionResult> Login(LoginViewModel vm, string returnUrl = null)
         {
+            ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
                 var result = await _signInManager.PasswordSignInAsync(vm.UsernameLogin, vm.PasswordLogin, vm.RememberMe, false);
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("Index", "Home");
+                    // return RedirectToAction("Index", "Home");
+                    _logger.LogInformation("User logged in.");
+                    return RedirectToLocal(returnUrl);
                 }
                 else
                 {
@@ -159,7 +166,8 @@ namespace asp_ecommerce.Controllers
             if (result.Succeeded)
             {
                 _logger.LogInformation("User logged in with {Name} provider.", info.LoginProvider);
-                return RedirectToAction("Index", "Home");
+                // return RedirectToAction("Index", "Home");
+                return RedirectToLocal(returnUrl);
             }
             if (result.IsLockedOut)
             {
@@ -170,14 +178,15 @@ namespace asp_ecommerce.Controllers
                 // If the user does not have an account, then ask the user to create an account.
                 ViewData["ReturnUrl"] = returnUrl;
                 ViewData["LoginProvider"] = info.LoginProvider;
-                return View("ExternalLogin", new ExternalLoginViewModel());
+                var email = info.Principal.FindFirstValue(ClaimTypes.Email);
+                return View("ExternalLogin", new ExternalLoginViewModel{ Email = email });
             }
         }
 
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ExternalLoginConfirmation(ExternalLoginViewModel model)
+        public async Task<IActionResult> ExternalLoginConfirmation(ExternalLoginViewModel vm)
         {
             if (ModelState.IsValid)
             {
@@ -187,7 +196,7 @@ namespace asp_ecommerce.Controllers
                 {
                     throw new ApplicationException("Error loading external login information during confirmation.");
                 }
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = vm.Email, Email = vm.Email };
                 var result = await _userManager.CreateAsync(user);
                 if (result.Succeeded)
                 {
@@ -201,7 +210,7 @@ namespace asp_ecommerce.Controllers
                 }
                 AddErrors(result);
             }
-            return View(nameof(ExternalLogin), model);
+            return View(nameof(ExternalLogin), vm);
         }
         // ************************* END OF EXTERNAL LOGIN *******************************
 
@@ -211,6 +220,7 @@ namespace asp_ecommerce.Controllers
         {
             return View();
         }
+
 
         #region Helpers
 
